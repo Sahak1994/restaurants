@@ -1,7 +1,33 @@
 .Restaurant {
-
+  padding: 10px 15px;
+  margin-top: 56px;
+  margin-bottom: 56px;
 }
 
-.a {
-  margin-top: 56px;
+.Description {
+  display: flex;
+  flex-direction: column;
+}
+
+.Description h2 {
+  color: #d98324;
+  font-size: 36px;
+  margin: 0;
+}
+
+.Description p {
+  text-align: justify;
+  border: 1px solid orange;
+  border-radius: 8px;
+  padding: 8px;
+  text-indent: 15px;
+}
+
+.Testimonials {
+  font-weight: bold;
+}
+
+.Testimonials span {
+  color: #d98324;
+  font-size: large;
 }

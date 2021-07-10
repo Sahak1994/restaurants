@@ -66,8 +66,7 @@ const TableSection = ({ data }) => {
                   style={{
                     minWidth: column.minWidth,
                     maxWidth: column.maxWidth,
-                  }}
-                >
+                  }}>
                   {column.label}
                 </StyledTableCell>
               ))}

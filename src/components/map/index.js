@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
 import ReactMapGL,  { Marker } from 'react-map-gl';
+import isEmpty from 'lodash/isEmpty';
+
+import { withStyles, makeStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import PlaceIcon from '@material-ui/icons/Place';
-import isEmpty from 'lodash/isEmpty';
 
 const useStyles = makeStyles({
   description: {
@@ -54,8 +55,7 @@ export const Map = ({ data }) => {
         data.map(item => (
           <Marker key={item.id} latitude={item.latitude} longitude={item.longitude} offsetLeft={-20} offsetTop={-10} captureClick={true}>
             <StyledIconButton
-              onClick={() => history.push(`/${item.id}`)}  
-            >
+              onClick={() => history.push(`/${item.id}`)}>
               <StyledPlaceIcon color='secondary' />
               <p className={classes.description}>{item.title}</p> 
             </StyledIconButton>

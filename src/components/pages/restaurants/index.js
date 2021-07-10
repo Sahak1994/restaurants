@@ -1,11 +1,12 @@
-import Header from "../../header";
 import PropTypes from "prop-types";
+import isEmpty from "lodash/isEmpty";
+
 import { Map } from "components/map";
+import Header from "components/header";
 import TableSection from "components/pages/restaurants/table-section";
-import Footer from "../../footer";
+import Footer from "components/footer";
 
 import classes from "./Restaurants.module.css";
-import isEmpty from "lodash/isEmpty";
 
 const Restaurants = ({ data }) => {
   return (
@@ -14,7 +15,7 @@ const Restaurants = ({ data }) => {
       {!isEmpty(data) && (
         <main className={classes.MainSection}>
           <TableSection data={data} />
-          <div style={{ height: "100vh", width: "100%" }}>
+          <div className={classes.Map}>
             <Map data={data} />
           </div>
         </main>

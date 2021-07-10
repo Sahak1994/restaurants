@@ -1,11 +1,12 @@
-import React from "react";
-import Restaurant from "components/pages/restaurant";
+import React, { useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { useQueryClient, useQuery, useMutation } from "react-query";
 import axios from "config/axios";
 import get from "lodash/get";
 import defaultTo from "lodash/defaultTo";
-import { useCallback } from "react";
+
+import Restaurant from "components/pages/restaurant";
+import Loader from 'UI/loader';
 
 const RestaurantContainer = () => {
   const queryClient = useQueryClient();
@@ -44,7 +45,6 @@ const RestaurantContainer = () => {
   });
 
   const {
-    isLoading: areRestaurantCommentsLoading,
     error: restaurantCommentsError,
     data: restaurantComments,
   } = useQuery("restaurantComments", getCommentsQuery, {
@@ -84,7 +84,6 @@ const RestaurantContainer = () => {
   const {
     mutate: changeRating,
     isLoading: isChangeRatingLoading,
-    data: changeRatingResult,
     error: changeRatingError,
   } = useMutation(changeRatingFunc);
 
@@ -116,20 +115,25 @@ const RestaurantContainer = () => {
   const {
     mutate: addComment,
     isLoading: addCommentIsLoading,
-    data: addCommentResult,
     error: addCommentError,
   } = useMutation(addCommentFunc);
 
-  if (isRestaurantLoading) return "Loading...";
+  if (isRestaurantLoading) return <Loader />;
 
-  if (restaurantError)
-    return "An error has occurred: " + restaurantError.message;
+  if (
+    restaurantError || 
+    addCommentError || 
+    changeRatingError ||
+    restaurantCommentsError
+  ) return "An error has occurred: " + restaurantError.message;
 
   return (
     <div>
       <Restaurant
         baseInfo={restaurantData}
-        comments={get(restaurantComments, "data", [])}
+        isChangeRatingLoading={isChangeRatingLoading}
+        comments={get(restaurantComments, "data", {})}
+        addCommentIsLoading={addCommentIsLoading}
         mutations={{
           changeRating,
           addComment,
