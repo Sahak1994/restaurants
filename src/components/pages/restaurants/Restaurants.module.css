@@ -1,0 +1,8 @@
+.Restaurants {
+  height: 100vh;
+}
+
+.MainSection {
+  overflow: auto;
+  margin-top: 56px;
+}
