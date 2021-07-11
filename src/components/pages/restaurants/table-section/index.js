@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useHistory } from "react-router-dom";
+import defaultTo from 'lodash/defaultTo';
+
 import { makeStyles, withStyles } from "@material-ui/core/styles";
+import Rating from "@material-ui/lab/Rating";
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -11,7 +14,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import orange from "@material-ui/core/colors/orange";
-import defaultTo from 'lodash/defaultTo';
 
 const color = orange[300];
 
@@ -88,9 +90,15 @@ const TableSection = ({ data }) => {
                       return (
                         <StyledTableCell key={column.id} align={column.align}>
                           {column.id === "rateValue"
-                            ? defaultTo(Math.round(
-                                restaurant.rateValue / restaurant.rateCount
-                              ), 0)
+                            ? (
+                              <Rating
+                                name="restaurant_rating"
+                                disabled
+                                value={defaultTo(Math.round(
+                                  restaurant.rateValue / restaurant.rateCount
+                                ), 0)}
+                              />
+                            ) 
                             : restaurant[column.id]}
                         </StyledTableCell>
                       );

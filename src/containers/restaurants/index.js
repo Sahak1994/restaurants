@@ -19,7 +19,7 @@ const RestaurantsContainer = () => {
 
   const sortedData = sortBy(
     get(restaurants, 'data', {}), 
-    restaurant => -restaurant.rateValue,
+    restaurant => -(restaurant.rateValue / restaurant.rateCount),
   );
 
   return <Restaurants data={sortedData} />;
